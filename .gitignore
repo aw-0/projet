@@ -1,0 +1,6 @@
+v-env/bin/
+v-env/lib/
+*.cfg
+*.pyc
+*.DS_Store
+*.code-workspace
