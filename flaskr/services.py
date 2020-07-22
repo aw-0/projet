@@ -5,4 +5,16 @@ class ProjectService:
         self.model = ProjectModel()
 
     def create(self, params):
-        return self.model.create(params["ID"],params["ProjectName"],params["ProjectDescription"],params["ProjectLead"],params["StartDate"])
+        return self.model.create(params)
+
+    def update(self, params):
+        return self.model.update(params)
+
+    def delete(self, params):
+        return self.model.delete(params)
+
+    def select(self, params):
+        return self.model.select(params)
+    
+    def selectAll(self):
+        return self.model.selectAll()
