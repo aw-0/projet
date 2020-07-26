@@ -8,22 +8,38 @@ app = Flask(__name__)
 # def hello():                      
 #     return "Hello World!"
 
-@app.route("/")
-def home():
-    return render_template('index.html')
+@app.route("/example1")
+def example1():
+    return render_template('example1.html')
 
-@app.route('/success/<name>')
-def success(name):
+@app.route('/example1PostReturn/<name>')
+def example1PostReturn(name):
     return f'Welcome {name}!'
 
-@app.route('/login', methods=['POST'])
-def login():
+@app.route('/example1Post', methods=['POST'])
+def example1Post():
     user = request.form['nm']
-    return redirect(url_for('success',name=user))
+    return redirect(url_for('example1PostReturn',name=user))
 
 @app.route('/projectAdd')
 def project_add():
     return render_template('projectAdd.html')
+
+@app.route("/projectAddPostReturn/<ID>/<projectName>")
+def projectAddPostReturn(ID, projectName):
+    return f"{projectName} is created successfully."
+
+@app.route("/projectAddPost", methods=["POST"])
+def projectAddPost():
+    project = {
+        "ID": request.form['ID'],
+        "ProjectName": request.form['ProjectName'],
+        "ProjectDescription": request.form['ProjectDescription'],
+        "ProjectLead": request.form['ProjectLead'],
+        "StartDate": request.form['StartDate']
+    }
+    returnObject = ProjectService().create(project)
+    return redirect(url_for('projectAddPostReturn', ID=returnObject['ID'], projectName=returnObject['ProjectName']))
 
 @app.route("/project", methods=["POST"])
 def create_project():
