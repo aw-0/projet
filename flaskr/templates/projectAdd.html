@@ -1,23 +1,63 @@
-<!DOCTYPE html>
-<html>
-<!-- <head>
-<title>Python Webpage</title>
-</head>
-<body>
-    <h1>Welcome to our Python Webpage!</h1>
-</body>
-</html> -->
+{% extends 'homeBase.html' %}
+
+{% block title%}Home Page{% endblock %}
+
+{% block content %}
+<!--<p>My Context: {{userContext}}</p>-->
+<div class="container">
+    <h1><i class="fa fa-list" style="font-size:36px;"></i> Project Adding</h1>
+</div>
+<form action = "http://localhost:5000/projectAddPost" method = "post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                        <label for="ID">Project ID</label>
+                        <input type = "ID" name = "ID" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                        <label for="ProjectName">Project Name</label>
+                        <input type = "Project Name" name = "ProjectName" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                        <label for="Project Description">Project Description</label>
+                        <input type = "Project Description" name = "ProjectDescription" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                        <label for="Project Lead">Project Lead</label>
+                        <input type = "Project Lead" name = "ProjectLead" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                        <label for="Start Date">Start Date</label>
+                        <input type = "Start Date" name = "StartDate" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                        <input type = "submit" name = "Submit" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 
-<body>
-    <form action = "http://localhost:5000/projectAddPost" method = "post">
-        <p>Enter Name:</p>
-        <p><input type = "ID" name = "ID" /></p>
-        <p><input type = "Project Name" name = "ProjectName" /></p>
-        <p><input type = "Project Description" name = "ProjectDescription" /></p>
-        <p><input type = "Project Lead" name = "ProjectLead" /></p>
-        <p><input type = "Start Date" name = "StartDate" /></p>
-        <p><input type = "submit" value = "Submit" /></p>
-    </form>
-</body>
-</html>
+{% endblock %}

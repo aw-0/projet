@@ -2,7 +2,7 @@ import sqlite3
 
 class ProjectSchema:
     def __init__(self):
-        self.conn = sqlite3.connect('Project.db')
+        self.conn = sqlite3.connect('Project1.db')
         self.createProjectTable()
         # Why are we calling user table before to_do table
         # what happens if we swap them?
@@ -71,9 +71,9 @@ class ProjectModel:
 
         ID = params["ID"]
 
-        self.conn.execute(f"DELETE FROM Project WHERE ID = {ID}")
+        #self.conn.execute(f"DELETE FROM Project WHERE ID = {ID}")
 
-        self.conn.commit()
+        #self.conn.commit()
 
         return {
             "status": 1
@@ -82,15 +82,22 @@ class ProjectModel:
     def selectAll(self):
         result = {}
 
-        cursor = self.conn.execute(f"SELECT * FROM PROJECT")
+        cursor = self.conn.execute(f"SELECT * FROM Project")
 
         for row in cursor:
+            print(row)
             result["ID"] = str(row[0])
             result["ProjectName"] = row[1]
             result["ProjectDescription"] = row[2]
             result["ProjectLead"] = row[3]
             result["StartDate"] = row[4]
         
+        result.update({"ID": str(row[0]),
+        "ProjectName": row[1],
+        "ProjectDescription": row[2],
+        "ProjectLead": row[3],
+        "StartDate": row[4]})
+
         return result
     
     def select(self, params):

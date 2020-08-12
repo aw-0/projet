@@ -4,3 +4,6 @@ v-env/lib/
 *.pyc
 *.DS_Store
 *.code-workspace
+jinja2/
+jinja1/
+startbootstrap-sb-admin-2-gh-pages/
