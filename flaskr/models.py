@@ -2,7 +2,7 @@ import sqlite3
 
 class ProjectSchema:
     def __init__(self):
-        self.conn = sqlite3.connect('Project1.db')
+        self.conn = sqlite3.connect('Project.db')
         self.createProjectTable()
         # Why are we calling user table before to_do table
         # what happens if we swap them?
@@ -22,7 +22,7 @@ class ProjectModel:
 
     def create(self, params):
 
-        ID = params["ID"]
+        ID = ProjectModel().generateNewID()
         ProjectName = params["ProjectName"]
         ProjectDescription= params["ProjectDescription"]
         ProjectLead = params["ProjectLead"]
@@ -71,34 +71,34 @@ class ProjectModel:
 
         ID = params["ID"]
 
-        #self.conn.execute(f"DELETE FROM Project WHERE ID = {ID}")
+        self.conn.execute(f"DELETE FROM Project WHERE ID = {ID}")
 
-        #self.conn.commit()
+        self.conn.commit()
 
         return {
             "status": 1
         }
 
     def selectAll(self):
-        result = {}
+        results = []
 
         cursor = self.conn.execute(f"SELECT * FROM Project")
 
         for row in cursor:
-            print(row)
-            result["ID"] = str(row[0])
-            result["ProjectName"] = row[1]
-            result["ProjectDescription"] = row[2]
-            result["ProjectLead"] = row[3]
-            result["StartDate"] = row[4]
-        
-        result.update({"ID": str(row[0]),
+            results.append({"ID": str(row[0]),
         "ProjectName": row[1],
         "ProjectDescription": row[2],
         "ProjectLead": row[3],
         "StartDate": row[4]})
+            # print(row)
+            # result["ID"] = str(row[0])
+            # result["ProjectName"] = row[1]
+            # result["ProjectDescription"] = row[2]
+            # result["ProjectLead"] = row[3]
+            # result["StartDate"] = row[4]
+    
 
-        return result
+        return results
     
     def select(self, params):
         ID = params["ID"]
@@ -115,3 +115,9 @@ class ProjectModel:
             result["StartDate"] = row[4]
         
         return result
+    
+    def generateNewID(self):
+        newID = self.conn.execute(f"SELECT max(ID)+1 FROM PROJECT").fetchone()[0]
+
+        return int(newID)
+

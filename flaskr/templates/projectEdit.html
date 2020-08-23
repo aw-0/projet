@@ -3,13 +3,36 @@
 {% block title%}Home Page{% endblock %}
 
 {% block content %}
-<!--<p>My Context: {{userContext}}</p>-->
+<!-- <p>Project Context: {{project}}</p> -->
 <div class="container">
     <h1>Project Editing</h1>
+    <br>
 </div>
 <div class="container">
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <div class="container">
+        <form action="/projectEdit" method="post">
+            <div class="form-group">
+                <label>Project ID: </label>
+                <label>{{project.ID}}</label>
+                <input id="id" name="id" type="text" value="{{project.ID}}" />
+                <br>
+                <label for="projectName">Project Name: </label>
+                <input id="projectName" name="projectName" type="text" value="{{project.ProjectName}}" />
+                <br>
+                <label for="projectDescription">Project Description: </label>
+                <input id="projectDescription" name="projectDescription" type="text" value="{{project.ProjectDescription}}" />
+                <br>
+                <label for="projectLead">Project Lead: </label>
+                <input id="projectLead" name="projectLead" type="text" value="{{project.ProjectLead}}" />
+                <br>
+                <label for="startDate">Start Date: </label>
+                <input id="startDate" name="startDate" type="date" value="{{project.StartDate}}" />
+                <br>
+                <a onclick="goBack()" class="btn btn-primary">Back</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
 </div>
-
-
 {% endblock %}

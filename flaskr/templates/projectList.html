@@ -9,6 +9,32 @@
 </div>
 <div class="container">
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <table class="table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Project Name</th>
+                    <th class="text-center">Project Description</th>
+                    <th class="text-center">Project Lead</th>
+                    <th class="text-center">Start Date</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for n in projectList %}
+                <tr>
+                    <td>{{n.ID}}</td>
+                    <td>{{n.ProjectName}}</td>
+                    <td>{{n.ProjectDescription}}</td>
+                    <td>{{n.ProjectLead}}</td>
+                    <td>{{n.StartDate}}</td>
+                    <td><a href="/projectEdit?id={{n.ID}}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="/projectDelete?id={{n.ID}}" class="btn btn-primary">Delete</a></td><!-- <td><a href='/projectEdit?id={{n.ID}}'>Edit</a></td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 </div>
 
 

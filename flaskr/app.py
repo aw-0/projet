@@ -26,49 +26,68 @@ def home():
     template = env.get_template('home.html')
     return template.render(userContext="Andrew")
 
-@app.route("/projectAdd")
+@app.route("/projectAdd", methods=["GET"])
 def projectAdd():
     template = env.get_template('projectAdd.html')
     return template.render(userContext="Andrew")
 
-@app.route("/projectEdit")
-def projectEdit():
-    template = env.get_template('projectEdit.html')
-    return template.render(userContext="Andrew")
+# @app.route("/projectAddPostReturn/<ID>/<projectName>")
+# def projectAddPostReturn(ID, projectName):
+#     tm = Template("{{ projectName }} is created successfully.")
+#     return tm.render(projectName=projectName)
 
-@app.route("/projectList")
-def projectList():
-    template = env.get_template('projectList.html')
-    return template.render(userContext="Andrew")
-
-@app.route("/projectAddPostReturn/<ID>/<projectName>")
-def projectAddPostReturn(ID, projectName):
-    tm = Template("{{ projectName }} is created successfully.")
-    return tm.render(projectName=projectName)
-
-@app.route("/projectAddPost", methods=["POST"])
+@app.route("/projectAdd", methods=["POST"])
 def projectAddPost():
     project = {
-        "ID": request.form['ID'],
         "ProjectName": request.form['ProjectName'],
         "ProjectDescription": request.form['ProjectDescription'],
         "ProjectLead": request.form['ProjectLead'],
         "StartDate": request.form['StartDate']
     }
-    returnObject = ProjectService().create(project)
-    return redirect(url_for('projectAddPostReturn', ID=returnObject['ID'], projectName=returnObject['ProjectName']))
+    ProjectService().create(project)
+    return redirect(url_for('projectList'))
+    #return redirect(url_for('projectAddPostReturn', ID=returnObject['ID'], projectName=returnObject['ProjectName']))
+
+@app.route("/projectEdit", methods=['GET'])
+def projectEdit():
+    projectID = request.args.get('id')
+    project = ProjectService().select({
+        "ID": projectID
+    })
+    template = env.get_template('projectEdit.html')
+    return template.render(project=project)
+
+@app.route("/projectEdit", methods=["POST"])
+def projectEditPost():
+    project = {}
+
+    project["ID"]=request.form['id']
+    project["ProjectName"]= request.form['projectName']
+    project["ProjectDescription"]= request.form['projectDescription']
+    project["ProjectLead"]= request.form['projectLead']
+    project["StartDate"]= request.form['startDate']
+
+    ProjectService().update(project)
+    return redirect(url_for('projectList'))
+
+@app.route("/projectDelete", methods=["GET"])
+def delete_project():
+    projectID = request.args.get('id')
+    ProjectService().delete({
+        "ID": projectID
+    })
+    return redirect(url_for('projectList'))
+    #return jsonify(ProjectService().delete(request.get_json()))
+
+@app.route("/projectList")
+def projectList():
+    projectList = ProjectService().selectAll()
+    template = env.get_template('projectList.html')
+    return template.render(userContext="Andrew", projectList=projectList)
 
 @app.route("/project", methods=["POST"])
 def create_project():
     return jsonify(ProjectService().create(request.get_json()))
-
-@app.route("/project", methods=["PUT"])
-def update_project():
-    return jsonify(ProjectService().update(request.get_json()))
-
-@app.route("/project", methods=["DELETE"])
-def delete_project():
-    return jsonify(ProjectService().delete(request.get_json()))
 
 @app.route("/project", methods=["GET"])
 def view_project():
@@ -80,6 +99,6 @@ def view_all_project():
 
 
 if __name__ == '__main__':
-    ProjectSchema()
-    print(ProjectModel().selectAll ())
+    ProjectSchema().createProjectTable()
+    print(ProjectModel().generateNewID())#ProjectModel().selectAll ())
     app.run(debug = True)
