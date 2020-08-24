@@ -7,3 +7,4 @@ v-env/lib/
 jinja2/
 jinja1/
 startbootstrap-sb-admin-2-gh-pages/
+*.db
