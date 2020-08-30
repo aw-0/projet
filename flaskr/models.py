@@ -117,7 +117,13 @@ class ProjectModel:
         return result
     
     def generateNewID(self):
-        newID = self.conn.execute(f"SELECT max(ID)+1 FROM PROJECT").fetchone()[0]
-
-        return int(newID)
+        cursor = self.conn.execute(f"SELECT * FROM PROJECT")
+        ctr = 0
+        for thing in cursor:
+            ctr = ctr + 1
+        if ctr == 0:
+            return 1
+        if ctr > 0:
+            newID = self.conn.execute(f"SELECT 1 FROM PROJECT").fetchone()[0]
+            return int(newID)
 

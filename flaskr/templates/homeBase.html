@@ -28,15 +28,15 @@
             <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/home">Home</a>
-            </li>
+            <!-- </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/projectEdit">Project Edit</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/projectAdd">Project Add</a>
-            </li>
+            </li> -->
             <li class="nav-item active">
-                <a class="nav-link" href="/projectList">Project List</a>
+                <a class="nav-link" href="/projectList">Project</a>
             </li>
         </ul>
         
@@ -50,5 +50,28 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBFsLvEDwqVkII6fIr9HQ5NZab8KEtIwXI",
+        authDomain: "web-projet-bb45f.firebaseapp.com",
+        databaseURL: "https://web-projet-bb45f.firebaseio.com",
+        projectId: "web-projet-bb45f",
+        storageBucket: "web-projet-bb45f.appspot.com",
+        messagingSenderId: "783022525179",
+        appId: "1:783022525179:web:0dc5e3711a14791b0cbe5e",
+        measurementId: "G-2S5T2EK9V0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    </script>
     </body>
 </html>

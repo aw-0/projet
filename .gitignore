@@ -8,3 +8,4 @@ jinja2/
 jinja1/
 startbootstrap-sb-admin-2-gh-pages/
 *.db
+flaskr/Project.db
