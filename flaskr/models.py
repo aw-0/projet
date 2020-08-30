@@ -124,6 +124,6 @@ class ProjectModel:
         if ctr == 0:
             return 1
         if ctr > 0:
-            newID = self.conn.execute(f"SELECT 1 FROM PROJECT").fetchone()[0]
+            newID = self.conn.execute(f"SELECT max(ID)+1 FROM PROJECT").fetchone()[0]
             return int(newID)
 
